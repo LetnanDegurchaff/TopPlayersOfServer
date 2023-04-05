@@ -15,6 +15,8 @@ namespace TopPlayersOfServer
 
     class Server
     {
+        private const int PlayersInTopCount = 3;
+
         private List<Player> _players;
 
         public Server()
@@ -33,10 +35,10 @@ namespace TopPlayersOfServer
             ConsoleOutputMethods.WriteRedText("Все игроки на сервере");
             ShowPlayers(_players);
 
-            ConsoleOutputMethods.WriteRedText("Топ 3 игроков по уровню");
+            ConsoleOutputMethods.WriteRedText($"Топ {PlayersInTopCount} игроков по уровню");
             ShowPlayers(topThreeLevelPlayers);
 
-            ConsoleOutputMethods.WriteRedText("Топ 3 игроков по силе");
+            ConsoleOutputMethods.WriteRedText($"Топ {PlayersInTopCount} игроков по силе");
             ShowPlayers(topThreeStrengthPlayers);
         }
 
@@ -54,7 +56,7 @@ namespace TopPlayersOfServer
         {
             return _players
                 .OrderByDescending(player => player.Strength)
-                .Take(3)
+                .Take(PlayersInTopCount)
                 .ToList();
         }
 
@@ -62,7 +64,7 @@ namespace TopPlayersOfServer
         {
             return _players
                 .OrderByDescending(player => player.Level)
-                .Take(3)
+                .Take(PlayersInTopCount)
                 .ToList();
         }
     }
